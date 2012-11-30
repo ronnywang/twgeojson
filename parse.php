@@ -160,7 +160,7 @@ class Parser
         $json->description = '全國村里界圖（台澎金馬）-經緯度';
         $json->data = $villages;
 
-        file_put_contents('output.json', json_encode($json, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+        file_put_contents('output.json', json_encode($json, JSON_UNESCAPED_UNICODE));
         $json->data = array_slice($json->data, 0, 10);
         file_put_contents('output.sample.json', json_encode($json, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
