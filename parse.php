@@ -141,7 +141,7 @@ class Parser
         $fp = popen('shp2pgsql -W big5-2003 ' . escapeshellarg($file), 'r');
         $villages = [];
         while (false !== ($line = fgets($fp))) {
-            if (!preg_match('#^INSERT INTO ".*" \((.*)\) VALUES \((.*)\)#', $line, $matches)) {
+            if (!preg_match('#^INSERT INTO "[^"]*" \(([^)]*)\) VALUES \((.*)\)#', $line, $matches)) {
                 continue;
             }
             $columns = array_map(function($r) {
