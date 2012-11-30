@@ -13,16 +13,18 @@ twgeojson
 - twvillage.json.gz 輸出結果檔，一共 8052 村里，檔案大小 gzip 後還有 24MB 左右
 - twvillage.sample.json 跟 twvillage.json 格式一樣，只列出 10 個村里讓大家看看格式。
 
-鄉鎮市界圖
-----------
-資料來源: [國土資訊系統社會經濟資料庫共通平台 - 100年全國鄉鎮市區界圖](http://segis.moi.gov.tw/STAT/Web/Platform/Product/STAT_ProductFreeList.aspx)
+鄉鎮市界圖/縣市界圖
+-------------------
+資料來源: [國土資訊系統社會經濟資料庫共通平台](http://segis.moi.gov.tw/STAT/Web/Platform/Product/STAT_ProductFreeList.aspx)
 
-資料時間: 101年(已經升格五都)
+資料時間: 101年(已經升格五都), 98年(五都升格前)
 
 檔案說明:
 - twtown.json.gz 輸出結果檔，一共 369 鄉鎮，檔案大小 gzip 後還有 11MB 左右
+- twtown2009.json.gz 輸出結果檔，一共 367 鄉鎮，檔案大小 gzip 後有 12MB 左右
 - twtown.sample.json 跟 twtown.json 格式一樣，只列出一個鄉鎮讓大家看看格式
-- twcounty.json.gz 輸出結果檔，一共 22 鄉鎮，檔案大小 gzip 後還有 3MB 左右
+- twcounty.json.gz 輸出結果檔，一共 22 縣市，檔案大小 gzip 後還有 3MB 左右
+- twcounty2009.json.gz 輸出結果檔，一共 25 縣市，檔案大小 gzip 後還有 3MB 左右
 
 其他
 ----
