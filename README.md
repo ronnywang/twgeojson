@@ -3,6 +3,7 @@ twgeojson
 
 行政區域疆界
 county = 縣市, town = 鄉鎮市區, village = 村里
+以下資料在 [Dropbox](https://www.dropbox.com/sh/w7yq1muzpkhr4lq/h9-AIV6OCh) 上也有放一份
 
 村里界圖
 --------
@@ -67,5 +68,6 @@ county = 縣市, town = 鄉鎮市區, village = 村里
 ----
 - parse.php 將 shp 處理成 geojson 的程式，需要有 shp2pgsql (要裝 postgis)
   只需要將 shp 檔抓下來，再用 parse.php xxx.shp 就會產生 output.json 和 output.sample.json 了
+- scripts/simplify.php 可以降低精度，作法是 php scripts/simplify.php {old.json} 0.01 > {new.json}
 - 如果想要五都升格前的資料，可以到 [https://github.com/g0v/twgeojson](https://github.com/g0v/twgeojson)
 
