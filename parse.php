@@ -1,6 +1,7 @@
 <?php
 
 ini_set('memory_limit', '2048m');
+include('twd97tolatlng.php');
 
 class Parser
 {
@@ -65,7 +66,8 @@ class Parser
 
     public function getPoint() {
         $point_coords = unpack("d*", $this->fetchByte(32));
-        return [$point_coords[1], $point_coords[2]];
+        //return twd97_to_latlng($point_coords[1], $point_coords[2]);
+        return array($point_coords[1], $point_coords[2]);
     }
 
     public function getLinstring() {
@@ -81,7 +83,8 @@ class Parser
         $i = 1;
         $num_coords = count($line_coords);
         while ($i <= $num_coords) {
-            $components[] = [$line_coords[$i], $line_coords[$i + 1]];
+            //$components[] = twd97_to_latlng($line_coords[$i], $line_coords[$i + 1]);
+            $components[] = array($line_coords[$i], $line_coords[$i + 1]);
             $i += 4;
         }
         return $components;
@@ -121,19 +124,23 @@ class Parser
         $numeric = ['area', 'max_x', 'max_y', 'min_x', 'min_y', 'x', 'y', 'sort', 'shape_leng', 'shape_le_1', 'shape_area'];
         $int = ['objectid', 'oorig_fid'];
 
-        $obj = new StdClass;
+        $feature_obj = new StdClass;
+        $feature_obj->type = 'Feature';
+        $feature_obj->properties = new StdClass;
+        
         foreach (array_combine($columns, $values) as $k => $v) {
             if (in_array($k, $numeric)) {
-                $obj->{$k} = doubleval($v);
+                $feature_obj->properties->{$k} = doubleval($v);
             } elseif (in_array($k, $int)) {
-                $obj->{$k} = intval($v);
+                $feature_obj->properties->{$k} = intval($v);
             } elseif ('the_geom' == $k) {
-                $obj->{$k} = $this->parseWKB($v);
+                $feature_obj->geometry = $this->parseWKB($v);
             } else {
-                $obj->{$k} = $v;
+                $feature_obj->properties->{$k} = $v;
             }
         }
-        return $obj;
+        $feature_obj->id = $feature_obj->properties->villcode;
+        return $feature_obj;
     }
 
     public function main($file)
@@ -150,19 +157,19 @@ class Parser
             $values = array_map(function($r) {
                 return NULL == $r ? null : trim($r, '\'');
             }, explode(',', $matches[2]));
+
             $village = $this->combine($columns, $values);
             $villages[] = $village;
         }
         $json = new StdClass;
+        $json->type = 'FeatureCollection';
         $json->link = 'https://github.com/ronnywang/twgeojson';
-        $json->data_time = '2012-11-13';
+        $json->data_time = '2012';
         $json->data_source = 'http://tgos.nat.gov.tw/tgos/Web/Metadata/TGOS_MetaData_View.aspx?MID=36646&SHOW_BACK_BUTTON=false';
-        $json->description = '全國村里界圖（台澎金馬）-經緯度';
-        $json->data = $villages;
+        $json->description = '101.10.30台澎金馬村里界';
+        $json->features = $villages;
 
         file_put_contents('output.json', json_encode($json, JSON_UNESCAPED_UNICODE));
-        $json->data = array_slice($json->data, 0, 10);
-        file_put_contents('output.sample.json', json_encode($json, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
 }
 
