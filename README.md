@@ -2,6 +2,7 @@ twgeojson
 =========
 
 行政區域疆界
+county = 縣市, town = 鄉鎮市區, village = 村里
 
 村里界圖
 --------
@@ -19,11 +20,18 @@ twgeojson
 
 資料時間: 101年(已經升格五都), 98年(五都升格前)
 
-檔案說明:
+| 檔名                | 說明                         | 大小 |
+|---------------------|------------------------------|------|
+| twcounty2010.json   | 五都升格後縣市界圖(原始精度) | 9.9M |
+| twcounty2010.2.json | 精度 0.01 資料               | 89K  |
+| twcounty2010.3.json | 精度 0.001 資料              | 362K |
+| twcounty2010.4.json | 精度 0.0001 資料             | 1.8M |
+| twcounty2010.5.json | 精度 0.00001 資料            | 5.9M |
+| twcounty2010.6.json | 精度 0.000001 資料           | 8.8M |
+
 - twtown.json.gz 輸出結果檔，一共 369 鄉鎮，檔案大小 gzip 後還有 11MB 左右
 - twtown2009.json.gz 輸出結果檔，一共 367 鄉鎮，檔案大小 gzip 後有 12MB 左右
 - twtown.sample.json 跟 twtown.json 格式一樣，只列出一個鄉鎮讓大家看看格式
-- twcounty.json.gz 輸出結果檔，一共 22 縣市，檔案大小 gzip 後還有 3MB 左右
 - twcounty2009.json.gz 輸出結果檔，一共 25 縣市，檔案大小 gzip 後還有 3MB 左右
 
 其他
