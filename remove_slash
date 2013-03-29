@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+class Converter
+{
+    public static function removeSlash($content)
+    {
+        return preg_replace_callback('/([\x81-\xfe])\\\\/', function($matches) {
+            return $matches[1];
+        }, $content);
+    }
+}
+
+$fp = fopen('php://stdin', 'r');
+
+while (false !== ($line = fgets($fp))) {
+    echo Converter::removeSlash($line);
+}
+
+fclose($fp);
